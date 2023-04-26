@@ -14,26 +14,27 @@
             <div class="col-md-4">
                 <form>
                     <div class="mb-2">
-                        <input type="text" class="form-control" placeholder="Ad">
+                        <input v-model="contact.name" type="text" class="form-control" placeholder="Ad">
                     </div>
                     <div class="mb-2">
-                        <input type="text" class="form-control" placeholder="Resim URL">
+                        <input v-model="contact.photo" type="text" class="form-control" placeholder="Resim URL">
                     </div>
                     <div class="mb-2">
-                        <input type="email  " class="form-control" placeholder="Email">
+                        <input v-model="contact.email" type="email  " class="form-control" placeholder="Email">
                     </div>
                     <div class="mb-2">
-                        <input type="number" class="form-control" placeholder="Telefon">
+                        <input v-model="contact.mobile" type="number" class="form-control" placeholder="Telefon">
                     </div>
                     <div class="mb-2">
-                        <input type="text" class="form-control" placeholder="Şirket">
+                        <input v-model="contact.company" type="text" class="form-control" placeholder="Şirket">
                     </div>
                     <div class="mb-2">
-                        <input type="text" class="form-control" placeholder="Ünvan">
+                        <input v-model="contact.title" type="text" class="form-control" placeholder="Ünvan">
                     </div>
                     <div class="mb-2">
-                        <select class="form-control">
+                        <select v-model="contact.groupId" class="form-control" v-if="groups.length > 0">
                             <option value="">Seç</option>
+                            <option :value="group.id" v-for="group of groups" :key="group.id">{{ group.name }}</option>
                         </select>
                     </div>
                     <div class="mb-2">
@@ -49,7 +50,30 @@
 </template>
 
 <script>
+import { ContactService } from '@/services/ContactService'
 export default {
-    name: "AddContact"
+    name: "AddContact",
+    data: function () {
+        return {
+            contact: {
+                name: "",
+                photo: "",
+                email: "",
+                mobile: "",
+                company: "",
+                title: "",
+                groupId: "",
+            },
+            groups: []
+        }
+    },
+    created: async function () {
+        try {
+            let response = await ContactService.getAllGroups();
+            this.groups = response.data;
+        } catch (error) {
+            console.log(error);
+        }
+    }
 }
 </script>

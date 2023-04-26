@@ -27,20 +27,45 @@
             </div>
         </div>
     </div>
-    <div class="container mt-3">
+    <!-- spinner-->
+    <div v-if="loading">
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <Spinner />
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Error Message-->
+    <div v-if="!loading && errorMessage">
+        <div class="container mt-3">
+            <div class="row">
+                <div class="col">
+                    <p class="h4 text-danger fw-bold">{{ errorMessage }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="container mt-3" v-if="contacts.length > 0">
         <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-6" v-for="contact of contacts" :key="contact">
                 <div class="card my-2 list-group-item-success shadow-lg">
                     <div class="card-body">
                         <div class="row align-items-center">
                             <div class="col-sm-4">
-                                <img src="https://cdn-icons-png.flaticon.com/512/219/219986.png" alt="" class="contact-img">
+                                <img :src="contact.photo" alt="" class="contact-img">
                             </div>
                             <div class="col-sm-7">
                                 <ul class="list-group">
-                                    <li class="list-group-item">Ad : <span class="fw-bold">Ad</span></li>
-                                    <li class="list-group-item">Email : <span class="fw-bold">Email</span></li>
-                                    <li class="list-group-item">Telefon : <span class="fw-bold">Telefon</span></li>
+                                    <li class="list-group-item">Ad : <span class="fw-bold">{{ contact.name }}</span></li>
+                                    <li class="list-group-item">Email : <span class="fw-bold">{{ contact.email }}</span>
+                                    </li>
+                                    <li class="list-group-item">Telefon : <span class="fw-bold">{{ contact.mobile }}</span>
+                                    </li>
                                 </ul>
                             </div>
                             <div class="col-sm-1 d-flex flex-column justify-content-center align-items-center">
@@ -63,7 +88,35 @@
 </template>
 
 <script>
+import { ContactService } from '@/services/ContactService';
+import Spinner from '@/components/Spinner.vue';
+
 export default {
-    name: "ContactManager"
+    name: "ContactManager",
+    data: function () {
+        return {
+            loading: false,
+            contacts: [],
+            errorMessage: null
+        }
+    },
+    created: async function () {
+        try {
+            this.loading = true;
+            let response = await ContactService.getAllContacts();
+            this.contacts = response.data;
+            this.loading = false;
+        } catch (error) {
+            this.errorMessage = error;
+            this.loading = false;
+        }
+    },
+    methods: {
+
+    },
+    components: {
+        Spinner
+    }
+
 }
 </script>
