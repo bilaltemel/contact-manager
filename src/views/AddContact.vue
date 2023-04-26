@@ -12,27 +12,27 @@
     <div class="container mt-3">
         <div class="row">
             <div class="col-md-4">
-                <form>
+                <form @submit.prevent="submitCreate()">
                     <div class="mb-2">
-                        <input v-model="contact.name" type="text" class="form-control" placeholder="Ad">
+                        <input required v-model="contact.name" type="text" class="form-control" placeholder="Ad">
                     </div>
                     <div class="mb-2">
-                        <input v-model="contact.photo" type="text" class="form-control" placeholder="Resim URL">
+                        <input required v-model="contact.photo" type="text" class="form-control" placeholder="Resim URL">
                     </div>
                     <div class="mb-2">
-                        <input v-model="contact.email" type="email  " class="form-control" placeholder="Email">
+                        <input required v-model="contact.email" type="email" class="form-control" placeholder="Email">
                     </div>
                     <div class="mb-2">
-                        <input v-model="contact.mobile" type="number" class="form-control" placeholder="Telefon">
+                        <input required v-model="contact.mobile" type="number" class="form-control" placeholder="Telefon">
                     </div>
                     <div class="mb-2">
-                        <input v-model="contact.company" type="text" class="form-control" placeholder="Şirket">
+                        <input required v-model="contact.company" type="text" class="form-control" placeholder="Şirket">
                     </div>
                     <div class="mb-2">
-                        <input v-model="contact.title" type="text" class="form-control" placeholder="Ünvan">
+                        <input required v-model="contact.title" type="text" class="form-control" placeholder="Ünvan">
                     </div>
                     <div class="mb-2">
-                        <select v-model="contact.groupId" class="form-control" v-if="groups.length > 0">
+                        <select required v-model="contact.groupId" class="form-control" v-if="groups.length > 0">
                             <option value="">Seç</option>
                             <option :value="group.id" v-for="group of groups" :key="group.id">{{ group.name }}</option>
                         </select>
@@ -43,7 +43,7 @@
                 </form>
             </div>
             <div class="col-md-4">
-                <img src="https://cdn-icons-png.flaticon.com/512/219/219986.png" alt="" class="contact-img">
+                <img :src="contact.photo" alt="" class="contact-img">
             </div>
         </div>
     </div>
@@ -73,6 +73,21 @@ export default {
             this.groups = response.data;
         } catch (error) {
             console.log(error);
+        }
+    },
+    methods: {
+        submitCreate: async function () {
+            try {
+                let response = await ContactService.createContact(this.contact);
+                if (response) {
+                    return this.$router.push("/");
+                }
+                else {
+                    return this.$router.push("contacts/add");
+                }
+            } catch (error) {
+                console.log(error);
+            }
         }
     }
 }

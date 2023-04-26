@@ -13,7 +13,7 @@
     {
       "id": "TVobxeKbI",
       "name": "Glenda Kim",
-      "company": "Friend",
+      "company": "HCL Technologies",
       "email": "glenda@gmail.com",
       "title": "freelancer",
       "mobile": "8880009991",
@@ -23,22 +23,42 @@
     {
       "id": "UyEDV5Yds",
       "name": "Vladeen Min",
-      "company": "Service",
+      "company": "Backend Developer",
       "email": "vladeen@gmail.com",
       "title": "Electrician",
       "mobile": "9876546787",
-      "photo": "https://png.pngtree.com/png-clipart/20190922/original/pngtree-business-male-user-avatar-vector-png-image_4774078.jpg",
+      "photo": "https://i.pinimg.com/736x/64/81/22/6481225432795d8cdf48f0f85800cf66.jpg",
       "groupId": "4"
     },
     {
-      "name": "Rajan",
-      "photo": "https://icons.iconarchive.com/icons/graphicloads/colorful-long-shadow/256/User-icon.png",
-      "mobile": "9090909090",
-      "email": "rajan@gmail.com",
-      "company": "HCL Technologies",
-      "title": "Software Engineer",
-      "groupId": "1",
-      "id": "kLt-bJF"
+      "name": "Bilal Temel",
+      "photo": "https://cdn-icons-png.flaticon.com/512/219/219983.png",
+      "email": "bilal@gmail.com",
+      "mobile": 50434423454,
+      "company": "Perpcacom BT",
+      "title": "Software Developer",
+      "groupId": "5",
+      "id": "rPooli4"
+    },
+    {
+      "name": "Mehmet Emin Temel",
+      "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/User_icon_2.svg/2048px-User_icon_2.svg.png",
+      "email": "emin10@gmail.com",
+      "mobile": 53434423432,
+      "company": "Temel Technologies",
+      "title": "CEO",
+      "groupId": "5",
+      "id": "50AV15N"
+    },
+    {
+      "name": "Emre Temel",
+      "photo": "https://cdn-icons-png.flaticon.com/512/219/219986.png",
+      "email": "emre@gmail.com",
+      "mobile": 5543344553,
+      "company": "Temel Technologies",
+      "title": "Co-Founder",
+      "groupId": "3",
+      "id": "_tt0yTj"
     }
   ],
   "groups": [
